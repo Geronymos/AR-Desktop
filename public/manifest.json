@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "AR-Desktop",
+    "version": "1.0",
+    "description": "Watch your browser in augmented-reality. ",
+    "content_security_policy": "script-src 'self' https://unpkg.com/ 'unsafe-inline' 'unsafe-eval'; ",
+    "browser_action": {
+        "default_title": "Whereami?",
+        "off_default_popup": "index.html"
+    },
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "permissions": [
+        "tabs",
+        "desktopCapture",
+        "activeTab",
+        "tabCapture",
+        "<all_urls>"
+    ]
+}

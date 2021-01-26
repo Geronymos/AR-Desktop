@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="/main.js"></script>
+    <script src="/index.js"></script>
     <style>
-        #tensor {
+        #webcam {
             width: 100%;
             height: 100%;
             position: absolute;
@@ -15,69 +15,16 @@
     </style>
 </head>
 
-<body>
-    <span id="gesture"></span>
-    <video src="" id="tensor" autoplay="true" width="400" height="200"></video>
-    <a-scene physics="gravity: 0" stats>
-        <a-assets>
-            <a-mixin id="controller" super-hands="colliderEvent: collisions;
-                         colliderEventProperty: els;
-                         colliderEndEvent: collisions;
-                         colliderEndEventProperty: clearedEls;
-                         grabStartButtons: gripdown, pointdown, triggerdown;
-                         grabEndButtons: gripup, pointup, triggerup" 
-                         static-body="shape: sphere; sphereRadius: 1"
-                         
-                physics-collider collision-filter="collidesWith: default, red, green, blue;
-                                collisionForces: false">
-            </a-mixin>
-            <a-mixin id="cube" geometry="width: 0.5; height: 0.5; depth: 0.5" dynamic-body hoverable grabbable>
-            </a-mixin>
-            <a-mixin id="cube-hovered" material="opacity: 0.7; transparent: true"></a-mixin>
-        </a-assets>
-
-        <a-entity id="rightHand" hand-controls="hand: right" mixin="controller" >
-        </a-entity>
-        <a-entity id="leftHand" hand-controls="hand: left" mixin="controller">
-        </a-entity>
-
+<body style="margin : 0px; overflow: hidden;">
+    Hello this is an option.
+    <video src="" id="webcam" autoplay="true" width="400" height="200"></video>
+    <a-scene stats video-background="video: #webcam">
         <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
         <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
         <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-        <!-- <a-sky color="#ECECEC"></a-sky> -->
-
-        <a-box mixin="cube" sleepy position="0 1 -1" src="#red"
-            collision-filter="group: red; collidesWith: default, red, blue">
-        </a-box>
-        <a-box mixin="cube" sleepy position="0 1.6 -1" src="#red"
-            collision-filter="group: red; collidesWith: default, red, blue">
-        </a-box>
-
-        <a-box mixin="cube" position="-1 1 -1" src="#green"
-            collision-filter="group: green; collidesWith: default, green">
-        </a-box>
-        <a-box mixin="cube" position="-1 1.6 -1" src="#green"
-            collision-filter="group: green; collidesWith: default, green">
-        </a-box>
-
-        <a-box mixin="cube" position="1 1 -1" src="#blue" sleepy="angularDamping: 0; speedLimit: 1"
-            collision-filter="group: blue; collidesWith: default, red">
-        </a-box>
-        <a-box mixin="cube" position="1 1.6 -1" src="#blue" sleepy="angularDamping: 0; speedLimit: 1"
-            collision-filter="group: blue; collidesWith: default, red">
-        </a-box>
-
-        <a-camera look-controls wasd-controls>
-            <a-entity position="0 0 -1" id="custom_controls" mixin="controller" custom-controls="video: #tensor"></a-entity>
-            
-            <a-entity position="0 0 -1" id="palmBase" static-body></a-entity>
-            <a-entity position="0 0 -1" id="thumb" static-body></a-entity>
-            <a-entity position="0 0 -1" id="indexFinger" static-body></a-entity>
-            <a-entity position="0 0 -1" id="middleFinger"static-body ></a-entity>
-            <a-entity position="0 0 -1" id="ringFinger" static-body></a-entity>
-            <a-entity position="0 0 -1" id="pinky" static-body></a-entity>
-        </a-camera>
+        
+        <!-- <a-entity camera look-controls></a-entity> -->
 
     </a-scene>
 </body>

@@ -1,16 +1,24 @@
 const path = require('path');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     mode: 'development',
-    entry: './src/index.js',
+    entry: {
+        index: './src/index.js',
+        background: './src/background.js'
+    },
+    target: "node",
     output: {
-        filename: 'main.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
         globalObject: 'this'
     },
     devtool: 'source-map',
     devServer: {
-        contentBase: path.join(__dirname, 'public')
+        contentBase: path.join(__dirname, 'public'),
+        host: '0.0.0.0',//your ip address
+        port: 8080,
+        disableHostCheck: true,
     },
     module: {
         rules: [
@@ -24,11 +32,18 @@ module.exports = {
                 test: /\.wasm$/i,
                 type: 'javascript/auto',
                 use: [
-                  {
-                    loader: 'file-loader',
-                  },
+                    {
+                        loader: 'file-loader',
+                    },
                 ],
-              },
+            },
         ]
-    }
+    },
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                { from: "public" },
+            ],
+        }),
+    ],
 };
