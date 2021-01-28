@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Geronymos/AR-Desktop#readme",
   "devDependencies": {
+    "@types/chrome": "0.0.128",
     "copy-webpack-plugin": "^7.0.0",
     "file-loader": "^6.2.0",
     "web-ext": "^5.5.0",

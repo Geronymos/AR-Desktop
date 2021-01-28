@@ -5,6 +5,7 @@ import "aframe-physics-system/dist/aframe-physics-system";
 import "aframe-physics-extras"; */
 
 import "./components/video-background";
+import "./components/browser";
 
 
 function ready(fn) {
