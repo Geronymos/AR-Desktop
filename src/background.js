@@ -4,13 +4,15 @@ const constraints = {
     videoConstraints: {
         mandatory: {
             chromeMediaSource: 'tab',
-/*                minWidth: 1920,
+            minWidth: 1920,
             maxWidth: 1920,
             minHeight: 1080,
-            maxHeight: 1080 */
+            maxHeight: 1080
         }
     }
 };
+
+window.streams = [];
 
 function init() {
     captureTab();
@@ -27,11 +29,6 @@ function captureTab() {
             console.log(`Last Error: ${chrome.runtime.lastError.message}`);
             return;
         }
-
-        const elem = document.createElement('video');
-        document.body.appendChild(elem);
-        elem.srcObject = stream;
-        elem.play();
-
+        window.streams.push(stream);
     });
 }
