@@ -8,6 +8,7 @@ export default registerComponent('browser', {
   },
   init: function () {
     this.background = chrome.extension.getBackgroundPage();
+    this.tabs = [];
   },
   update: function () {
     const elem = this.el;
@@ -19,11 +20,38 @@ export default registerComponent('browser', {
     plane.setAttribute('tab', { stream: self.background.streams[0] });
 
 
+    // click event on plane gets executed in tab
+    elem.addEventListener("click", function (e) {
+      const position = e.detail.intersection.uv;
+      console.log("Clicked!", position);
+
+      chrome.tabs.executeScript(self.tabs[0].id, {
+        code: `(${click})(${position.x} * window.innerWidth, ${1 - position.y} * window.innerHeight)`
+      })
+    });
+
+    // click on an element on position x,y at position x, y
+    // https://stackoverflow.com/questions/3277369/how-to-simulate-a-click-by-using-x-y-coordinates-in-javascript
+    function click(x, y) {
+      var ev = new MouseEvent('click', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true,
+        'clientX': x,
+        'clientY': y
+      });
+
+      var el = document.elementFromPoint(x, y);
+      console.log(el); //print element to console
+      el.dispatchEvent(ev);
+    }
+
     // get resolution
     chrome.tabCapture.getCapturedTabs(function (tabs) {
       tabs.forEach(function (tab) {
-        chrome.tabs.get(tab.tabId, function(tab) {
-          plane.setAttribute('tab', { tabSize: {x: tab.width, y: tab.height} });
+        chrome.tabs.get(tab.tabId, function (tab) {
+          plane.setAttribute('tab', { tabSize: { x: tab.width, y: tab.height } });
+          self.tabs.push(tab);
         });
         // https://stackoverflow.com/questions/19758028/chrome-extension-get-dom-content
         chrome.tabs.executeScript(tab.tabId, { code: `(${onresize})()` })
@@ -32,7 +60,7 @@ export default registerComponent('browser', {
 
     // listen for messages with new resolution
     chrome.runtime.onMessage.addListener(function (message, sender, response) {
-      plane.setAttribute('tab', { tabSize: {x: message.width, y: message.height} });
+      plane.setAttribute('tab', { tabSize: { x: message.width, y: message.height } });
     });
 
     // function for each captures tab that messages the new resolution

@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --watch",
     "dev": "webpack serve",
-    "chrome": "web-ext run --source-dir ./dist/ -t chromium",
+    "chrome": "web-ext run --source-dir ./dist/ -t chromium --chromium-profile ~/.config/chromium/Default",
     "firefox": "web-ext run --source-dir ./dist/",
     "start": "npm run build & npm run chrome"
   },
