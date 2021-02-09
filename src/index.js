@@ -20,7 +20,7 @@ function main() {
   var video = document.querySelector("#webcam");
 
   if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: true })
+    navigator.mediaDevices.getUserMedia({ video: {facingMode: "environment"} })
       .then(function (stream) {
         video.srcObject = stream;
       })
