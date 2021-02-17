@@ -9,7 +9,8 @@
     "dev": "webpack serve",
     "chrome": "web-ext run --source-dir ./dist/ -t chromium --chromium-profile ~/.config/chromium/Default",
     "firefox": "web-ext run --source-dir ./dist/",
-    "start": "npm run build & npm run chrome"
+    "start": "npm run build & npm run chrome",
+    "build-ext": "webpack && web-ext build --source-dir ./dist/ --overwrite-dest"
   },
   "repository": {
     "type": "git",
