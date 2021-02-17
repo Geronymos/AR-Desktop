@@ -5,7 +5,7 @@
     "description": "Watch your browser in augmented-reality. ",
     "content_security_policy": "script-src 'self' https://unpkg.com 'unsafe-inline' 'unsafe-eval'; object-src 'self'",
     "browser_action": {
-        "default_title": "Whereami?",
+        "default_title": "🔴 start/stop XR-View 👓",
         "off_default_popup": "index.html"
     },
     "background": {

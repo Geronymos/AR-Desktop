@@ -17,7 +17,7 @@ export default registerComponent('browser', {
     // 3d plane that shows the video element
     const plane = document.createElement("a-plane");
     elem.appendChild(plane);
-    plane.setAttribute('tab', { stream: self.background.streams[0] });
+    plane.setAttribute('tab', { stream: self.background.captures[0].stream });
 
 
     // click event on plane gets executed in tab

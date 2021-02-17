@@ -12,23 +12,39 @@ const constraints = {
     }
 };
 
-window.streams = [];
+window.captures = [];
+var viewer = undefined;
 
-function init() {
-    captureTab();
-    chrome.tabs.create({ url: "/index.html" });
+chrome.browserAction.onClicked.addListener(onBrowserActionClicked);
+function onBrowserActionClicked(tab) {
+
+    // capture tab
+    if (tab.id !== viewer?.id && !captures.some(capture => capture.tab.id == tab.id)) {
+        chrome.tabCapture?.capture(constraints, function (stream) {
+            if (stream === null) {
+                console.log(`Last Error: ${chrome.runtime.lastError.message}`);
+                return;
+            }
+            captures.push({ stream, tab });
+        });
+    } else {
+        // stop capturing tab
+        var capture = captures.find(capture => capture.tab.id == tab.id);
+        console.log("Stop screen capture", capture);
+        capture.stream.getVideoTracks().forEach(track => track.stop());
+        capture.stream.getAudioTracks().forEach(track => track.stop());
+        captures = captures.filter(item => item !== capture);
+    }
+
+    // only show one viewer page
+    if (!viewer) {
+        chrome.tabs.create({ url: "/index.html" }, tab => viewer = tab);
+    }
 }
 
-chrome.browserAction.onClicked.addListener(init);
-
-
-function captureTab() {
-
-    chrome.tabCapture.capture(constraints, function (stream) {
-        if (stream === null) {
-            console.log(`Last Error: ${chrome.runtime.lastError.message}`);
-            return;
-        }
-        window.streams.push(stream);
-    });
-}
+// check if viewer page was closed
+chrome.tabs.onRemoved.addListener(function (tabId) {
+    if (tabId == viewer.id) {
+        viewer = undefined;
+    }
+});
