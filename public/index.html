@@ -11,22 +11,33 @@
             width: 100%;
             height: 100%;
             position: absolute;
+            display: none;
         }
     </style>
 </head>
 
 <body style="margin : 0px; overflow: hidden;">
-    Hello this is an option.
-    <video src="" id="webcam" autoplay="true" width="400" height="200"></video>
-    <a-scene stats video-background="video: #webcam" cursor="rayOrigin: mouse">
-        <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-        <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-        <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
 
-        <a-entity browser position="0 2 -3"></a-entity>
-        
+    <!-- <a-scene stats embedded arjs="sourceType: webcam;" cursor="rayOrigin: mouse"> -->
+    <a-scene stats embedded arjs="sourceType: webcam;" video-background="video: #webcam" cursor="rayOrigin: mouse">
+        <a-assets>
+            <video src="" id="webcam" autoplay="true" width="400" height="200"></video>
+        </a-assets>
+
+
+        <a-box position="0 0 3"></a-box>
         <!-- <a-entity camera look-controls></a-entity> -->
+        <a-entity look-controls camera>
+            <a-cursor></a-cursor>
+
+            <a-marker preset="hiro">
+                <a-box scale="0.1 0.1 0.1" position="0 1.1 0" event-set__click="_target: #tab; material.src: ${src}">
+                </a-box>
+                <a-entity id="tab" browser position="0 0 0" scale="1 1 1" rotation="-90 0 0"></a-entity>
+                <!-- <a-plane rotation="-90 0 0"></a-plane> -->
+                <!-- <a-box position="0 0.5 0"></a-box> -->
+            </a-marker>
+        </a-entity>
 
     </a-scene>
 </body>

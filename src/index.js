@@ -6,6 +6,7 @@ import "aframe-physics-extras"; */
 
 import "./components/video-background";
 import "./components/browser";
+import "ar.js";
 
 
 function ready(fn) {
