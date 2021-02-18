@@ -26,14 +26,16 @@ function onBrowserActionClicked(tab) {
                 return;
             }
             captures.push({ stream, tab });
+            chrome.runtime.sendMessage({ action: "start", tabId: tab.id});
         });
     } else {
         // stop capturing tab
         var capture = captures.find(capture => capture.tab.id == tab.id);
         console.log("Stop screen capture", capture);
+        chrome.runtime.sendMessage({ action: "stop", tabId: tab.id});
         capture.stream.getVideoTracks().forEach(track => track.stop());
         capture.stream.getAudioTracks().forEach(track => track.stop());
-        captures = captures.filter(item => item !== capture);
+        captures = captures.filter(item => item.tab.id !== capture.tab.id);
     }
 
     // only show one viewer page

@@ -17,28 +17,30 @@
 </head>
 
 <body style="margin : 0px; overflow: hidden;">
-
+    <div id="tabs" style="z-index: 99; position: absolute; top: 0px;"></div>
     <!-- <a-scene stats embedded arjs="sourceType: webcam;" cursor="rayOrigin: mouse"> -->
-    <a-scene stats embedded arjs="sourceType: webcam;" video-background="video: #webcam" cursor="rayOrigin: mouse">
+    <a-scene stats embedded arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;" video-background="video: #webcam" cursor="rayOrigin: mouse">
         <a-assets>
             <video src="" id="webcam" autoplay="true" width="400" height="200"></video>
         </a-assets>
 
-
+        <a-entity id="hud"></a-entity>
+        
         <a-box position="0 0 3"></a-box>
         <!-- <a-entity camera look-controls></a-entity> -->
         <a-entity look-controls camera>
             <a-cursor></a-cursor>
-
+            <a-entity id="markers"></a-entity>
+            
             <a-marker preset="hiro">
                 <a-box scale="0.1 0.1 0.1" position="0 1.1 0" event-set__click="_target: #tab; material.src: ${src}">
                 </a-box>
-                <a-entity id="tab" browser position="0 0 0" scale="1 1 1" rotation="-90 0 0"></a-entity>
                 <!-- <a-plane rotation="-90 0 0"></a-plane> -->
                 <!-- <a-box position="0 0.5 0"></a-box> -->
             </a-marker>
         </a-entity>
-
+        
+        <a-entity id="tab" browser position="0 0 0"></a-entity>
     </a-scene>
 </body>
 

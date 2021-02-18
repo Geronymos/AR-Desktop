@@ -31,4 +31,4 @@ function main() {
   }
 }
 
-ready(main);
+// ready(main);

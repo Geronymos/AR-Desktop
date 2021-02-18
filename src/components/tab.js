@@ -7,29 +7,36 @@ export default registerComponent('tab', {
     },
     init: function () {
         // maybe a layer would be faster: https://aframe.io/docs/1.1.0/components/layer.html#sidebar
-        const elem = this.el;
-        elem.setAttribute('geometry', { width: 16 / 9, height: 1 });
-        this.video = document.createElement("video");
-        this.videoInfo;
-        this.texture;
+        // const elem = this.el;
+
     },
     update: function (oldData) {
-        const elem = this.el;
-        const self = this;
-        const object3D = elem.object3D.children[0];
-        const data = this.data;
+        var elem = this.el;
+        var self = this;
+        var object3D = elem.getObject3D('mesh');
+        var data = this.data;
+
+        elem.setAttribute('geometry', { width: 16 / 9, height: 1 });
+        this.video = document.createElement("video");
+/*         const myTabs = document.getElementById("tabs");
+        this.video.width = 400;
+        this.video.height = 200;
+        myTabs.appendChild(this.video); */
+        this.videoInfo;
+        this.texture;
 
         // set texture
-        if (data.stream && (data.stream !== oldData.stream)) {
+        if (data.stream ) {
             // video element that holds the stream
 
             this.video.srcObject = data.stream;
             this.video.play();
-            elem.setAttribute('material', { src: self.video, repeat: { x: 1, y: 1 } });
+            // elem.setAttribute('material', { src: this.video, repeat: { x: 1, y: 1 } });
+            object3D.material.map = new THREE.VideoTexture( this.video );
             // https://stackoverflow.com/questions/26076259/get-media-detailsresolution-and-frame-rate-from-mediastream-object
             this.videoInfo = data.stream.getVideoTracks()[0].getSettings();
             this.texture = object3D.material.map;
-
+            console.log(object3D);
             this.texture.center.set(0.5, 0.5);
 
         }
