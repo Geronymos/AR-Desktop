@@ -13,7 +13,7 @@ export default registerComponent('window', {
         const plane = this.el;
         const self = this;
 
-        const {tab, stream} = this.data;
+        const { tab, stream } = this.data;
 
         // const plane = document.createElement("a-plane");
         const textElem = document.createElement("a-text");
@@ -35,51 +35,24 @@ export default registerComponent('window', {
         document.addEventListener("keyup", function (e) { self.onKey(tab, e) });
         document.addEventListener("keypress", function (e) { self.onKey(tab, e) });
 
-        chrome.tabs.executeScript(tab.id, { code: `(${self.onResize})()` });
-
-    },
-
-    remove: function () {
-
-    },
-
-    // function for each captures tab that messages the new resolution
-    onResize: function () {
-        window.addEventListener("resize", function (e) {
-            chrome.runtime.sendMessage({ action: "resize", width: window.innerWidth, height: window.innerHeight })
-        })
     },
 
     // process mouse event for execution
     onMouse: function (tab, e) {
+        console.log(e);
         const position = e.detail.intersection.uv;
 
-        chrome.tabs.executeScript(tab.id, {
-            code: `(${click})("${e.type}", ${position.x} * window.innerWidth, ${1 - position.y} * window.innerHeight)`
-        });
+        // send click message with unified position (0 to 1) to tab
+        chrome.tabs.sendMessage(tab.id, { action: "click", data: { type: e.type, ux: position.x, uy: 1 - position.y } })
 
-        // click on an element on position x,y at position x, y
-        // https://stackoverflow.com/questions/3277369/how-to-simulate-a-click-by-using-x-y-coordinates-in-javascript
-        function click(type, x, y) {
-            var ev = new MouseEvent(type, {
-                'view': window,
-                'bubbles': true,
-                'cancelable': true,
-                'clientX': x,
-                'clientY': y
-            });
-
-            var el = document.elementFromPoint(x, y);
-            console.log(el); //print element to console
-            el.dispatchEvent(ev);
-            el.focus();
-        }
     },
 
     // process keyboard event for execution
     onKey: function (tab, e) {
+        
         var event = {
             key: e.key,
+            type: e.type,
             code: e.code,
             location: e.location,
             ctrlKey: e.ctrlKey,
@@ -93,29 +66,7 @@ export default registerComponent('window', {
             which: e.which
         };
 
-        chrome.tabs.executeScript(tab.id, {
-            code: `(${key})("${e.type}", ${JSON.stringify(event)})`
-        });
-
-        function key(type, event) {
-            // more evnts for forms, input-fields and text-fields
-            // https://stackoverflow.com/questions/4158847/how-to-simulate-key-presses-or-a-click-with-javascript
-            var ev = new KeyboardEvent(type, event);
-            console.log(event, ev);
-            document.querySelectorAll("*").forEach(elem => elem.dispatchEvent(ev));
-
-            if (type == "keydown") {
-                // insertText deleteContentBackward insertFromPaste formatBold
-                // https://rawgit.com/w3c/input-events/v1/index.html#interface-InputEvent-Attributes
-
-                const active = document.activeElement;
-                switch (ev.key) {
-                    case "Enter": ev.shiftKey ? active.value += "\n" : active.form?.submit(); break;
-                    case "Backspace": active.value = active.value.slice(0, -1); break;
-                    default: (ev.key.length == 1) && (active.value += ev.key);
-                }
-            }
-        }
+        chrome.tabs.sendMessage(tab.id, { action: "key", data: event });
     }
 
 });

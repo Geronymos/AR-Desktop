@@ -3,7 +3,8 @@
     "name": "AR-Desktop",
     "version": "1.0",
     "description": "Watch your browser in augmented-reality. ",
-    "content_security_policy": "script-src 'self' https://unpkg.com 'unsafe-inline' 'unsafe-eval'; object-src 'self'",
+    "_content_security_policy": "script-src 'self' https://unpkg.com 'unsafe-inline' 'unsafe-eval'; object-src 'self'",
+    "content_security_policy": "script-src 'self' https://unpkg.com 'unsafe-eval'; object-src 'self'",
     "browser_action": {
         "default_title": "🔴 start/stop XR-View 👓",
         "off_default_popup": "index.html"
@@ -13,6 +14,16 @@
             "background.js"
         ]
     },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content-script.js"
+            ]
+        }
+    ],
     "permissions": [
         "tabs",
         "desktopCapture",

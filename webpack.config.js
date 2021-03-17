@@ -5,7 +5,8 @@ module.exports = {
     mode: 'development',
     entry: {
         index: './src/index.js',
-        background: './src/background.js'
+        "background-script": './src/background-script.js',
+        "content-script": './src/content-script.js'
     },
     target: "node",
     output: {
