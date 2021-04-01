@@ -5,6 +5,7 @@ import "./window"
 
 export default registerComponent('browser', {
   schema: {
+    // targets: {type: 'selectors'}
   },
   init: function () {
     this.background = chrome.extension.getBackgroundPage();
@@ -45,8 +46,8 @@ export default registerComponent('browser', {
       child.parentNode.removeChild(child);
     }
 
-    const myTabs = document.getElementById("tabs");
-    myTabs.innerHTML = "";
+/*     const myTabs = document.getElementById("tabs");
+    myTabs.innerHTML = ""; */
 
     chrome.extension.getBackgroundPage().captures.forEach(function ({ tab, stream }, index) {
       console.log(stream.id);

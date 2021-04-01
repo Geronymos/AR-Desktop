@@ -2,20 +2,22 @@ import { registerComponent } from "aframe";
 // import { VideoTexture } from "three";
 
 export default registerComponent('video-background', {
-  schema: {
-    video: { type: 'selector', default: 'video' }
+  schema: { type: 'selector', default: '#arjs-video'
   },
   init: function() {
-    
+
   },
   update: function () {
     const data = this.data;
-    const video = data.video;
+    const video = data;
 
     const self = this;
 
     this.isVR = false;
 
+    console.log("Video:", video);
+    if (!video) return;
+    console.log("Settings video-background!", video);
     video.addEventListener('loadeddata', function () {
       self.setBackground(this);
     });

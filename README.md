@@ -82,10 +82,6 @@ npm run firefox
 </tr>
 </table>
 
-
-
-
-
 ## ⚒ Build with
 
 [![A-FRAME](docs/aframe-logo.png)](https://aframe.io/)
@@ -98,16 +94,16 @@ npm run firefox
 
 ## Roadmap
 
+- [X] tab video streaming
+- [X] click event transmittion
 - [X] Keyboard input
 - [X] multiple tabs
 - [X] use environment camera in multi camera setups
-- [X] tab video streaming
-- [X] click event transmittion
-- [ ] Firefox support
-- [ ] Hand-tracking
-- [ ] stereoscopic camera
-- [ ] 3D-Object-Repo
+- [X] stereoscopic camera
 - [ ] virtual keyboard
+- [ ] Firefox/Mobile support
+- [ ] Hand-tracking
+- [ ] 3D-Object-Repo
 
 ### Future 👾
 
@@ -115,11 +111,6 @@ npm run firefox
     - [Fingerpose 🐙](https://github.com/andypotato/fingerpose) - Finger pose classifier for hand landmarks detected by TensorFlow.js handpose model 
 - [Mediapipe](https://google.github.io/mediapipe/solutions/hands) [[❔](https://google.github.io/mediapipe/solutions/hands#javascript-solution-api)] [[npm](https://www.npmjs.com/package/@mediapipe/hands)] - MediaPipe offers cross-platform, customizable ML solutions for live and streaming media. 
 - [Superhands 🐙](https://github.com/wmurphyrd/aframe-super-hands-component) - 👐All-in-one natural hand controller, pointer, and gaze interaction library for A-Frame 
-
-
-
-
-
 
 ## Related Projects 🔗
 
