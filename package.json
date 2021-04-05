@@ -9,7 +9,7 @@
     "dev": "webpack serve",
     "chrome": "web-ext run --source-dir ./dist/ -t chromium --chromium-profile ~/.config/chromium/Default",
     "firefox": "web-ext run --source-dir ./dist/",
-    "android": "web-ext run --source-dir ./dist/ -t firefox-android --adb-device XEDNW18725003450 --firefox-apk org.mozilla.firefox", 
+    "android": "web-ext run --source-dir ./dist/ -t firefox-android --adb-device XEDNW18725003450 --firefox-apk org.mozilla.firefox",
     "dev:chrome": "npm run build & npm run chrome",
     "dev:firefox": "npm run build & npm run firefox",
     "build-ext": "webpack && web-ext build --source-dir ./dist/ --overwrite-dest"
@@ -26,6 +26,7 @@
   "homepage": "https://github.com/Geronymos/AR-Desktop#readme",
   "devDependencies": {
     "@types/chrome": "0.0.128",
+    "@types/three": "^0.127.0",
     "copy-webpack-plugin": "^7.0.0",
     "file-loader": "^6.2.0",
     "web-ext": "^5.5.0",
@@ -50,6 +51,8 @@
     "ar.js": "^2.2.2",
     "dat.gui": "^0.7.7",
     "fingerpose": "0.0.2",
-    "super-hands": "^3.0.1"
+    "stats.js": "^0.17.0",
+    "super-hands": "^3.0.1",
+    "three": "^0.127.0"
   }
 }

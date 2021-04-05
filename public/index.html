@@ -5,30 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR-Browser-Extension</title>
-    <script src="/index.js"></script>
 </head>
 
 <body style="margin : 0px; overflow: hidden;">
+    <script src="/index.js"></script>
 
-    <!-- <a-scene stats embedded arjs="sourceType: webcam;" cursor="rayOrigin: mouse"> -->
-    <a-scene id="myScene"
-        arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false; "
-        cursor="rayOrigin: mouse" browser="targets: #markers" stats>
-
-        <!-- <a-box id="myBox" color="green" position="0 0 -3"></a-box> -->
-
-        <a-entity id="hud"></a-entity>
-        <a-box id="myTab" tabcapture position="0 0 -3"></a-box>
-
-        <a-entity look-controls camera>
-            <a-cursor></a-cursor>
-            <a-entity id="markers"></a-entity>
-<!--             <a-marker type="barcode">
-                <a-plane rotation="-90 0 0"></a-plane>
-            </a-marker> -->
-        </a-entity>
-        <a-entity position="0 0 0"></a-entity>
-    </a-scene>
 </body>
 
 </html>
