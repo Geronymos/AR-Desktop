@@ -18,7 +18,7 @@ var viewer = undefined;
 chrome.browserAction.onClicked.addListener(onBrowserActionClicked);
 function onBrowserActionClicked(tab) {
 
-    // capture tab
+/*     // capture tab
     if (tab.id !== viewer?.id && !captures.some(capture => capture.tab.id == tab.id)) {
         chrome.tabCapture?.capture(constraints, function (stream) {
             if (stream === null) {
@@ -36,7 +36,7 @@ function onBrowserActionClicked(tab) {
         capture.stream.getVideoTracks().forEach(track => track.stop());
         capture.stream.getAudioTracks().forEach(track => track.stop());
         captures = captures.filter(item => item.tab.id !== capture.tab.id);
-    }
+    } */
 
     // only show one viewer page
     if (!viewer) {
@@ -44,9 +44,9 @@ function onBrowserActionClicked(tab) {
     }
 }
 
-// check if viewer page was closed
+/* // check if viewer page was closed
 chrome.tabs.onRemoved.addListener(function (tabId) {
     if (tabId == viewer.id) {
         viewer = undefined;
     }
-});
+}); */
