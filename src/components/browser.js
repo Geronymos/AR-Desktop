@@ -1,11 +1,11 @@
-import { registerComponent } from "aframe";
+import { registerSystem } from "aframe";
 import "./window"
 // import { VideoTexture } from "aframe/src/lib/three";
 // import { VideoTexture } from "three";
 
-export default registerComponent('browser', {
+export default registerSystem('browser', {
   schema: {
-    // targets: {type: 'selectors'}
+    targets: {type: 'selectorAll'}
   },
   init: function () {
     this.background = chrome.extension.getBackgroundPage();

@@ -6,6 +6,7 @@ import "aframe-physics-extras"; */
 
 import "./components/video-background";
 import "./components/browser";
+import "./components/tabCapture";
 import "ar.js";
 
 window.addEventListener("arjs-video-loaded", e => document.querySelector("a-scene").setAttribute("video-background", "#arjs-video"));

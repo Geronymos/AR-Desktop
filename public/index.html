@@ -13,11 +13,12 @@
     <!-- <a-scene stats embedded arjs="sourceType: webcam;" cursor="rayOrigin: mouse"> -->
     <a-scene id="myScene"
         arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false; "
-        cursor="rayOrigin: mouse">
+        cursor="rayOrigin: mouse" browser="targets: #markers" stats>
 
         <!-- <a-box id="myBox" color="green" position="0 0 -3"></a-box> -->
 
         <a-entity id="hud"></a-entity>
+        <a-box id="myTab" tabcapture position="0 0 -3"></a-box>
 
         <a-entity look-controls camera>
             <a-cursor></a-cursor>
@@ -26,7 +27,7 @@
                 <a-plane rotation="-90 0 0"></a-plane>
             </a-marker> -->
         </a-entity>
-        <a-entity browser position="0 0 0"></a-entity>
+        <a-entity position="0 0 0"></a-entity>
     </a-scene>
 </body>
 

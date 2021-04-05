@@ -9,7 +9,9 @@
     "dev": "webpack serve",
     "chrome": "web-ext run --source-dir ./dist/ -t chromium --chromium-profile ~/.config/chromium/Default",
     "firefox": "web-ext run --source-dir ./dist/",
-    "start": "npm run build & npm run chrome",
+    "android": "web-ext run --source-dir ./dist/ -t firefox-android --adb-device XEDNW18725003450 --firefox-apk org.mozilla.firefox", 
+    "dev:chrome": "npm run build & npm run chrome",
+    "dev:firefox": "npm run build & npm run firefox",
     "build-ext": "webpack && web-ext build --source-dir ./dist/ --overwrite-dest"
   },
   "repository": {
